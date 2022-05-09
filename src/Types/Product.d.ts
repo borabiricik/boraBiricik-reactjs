@@ -1,5 +1,6 @@
 export interface IProductsInitialState {
   products: IProduct[] | null;
+  isLoading: boolean
 }
 
 export interface IProduct {
