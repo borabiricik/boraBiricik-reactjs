@@ -4,6 +4,7 @@ import { IProductsInitialState } from "../Types/Product";
 
 const initialState: IProductsInitialState = {
   products: null,
+  filteredProducts: null,
   isLoading: false,
 };
 
@@ -16,7 +17,15 @@ export const getProducts = createAsyncThunk("getProducts", async () => {
 const productStore = createSlice({
   name: "products",
   initialState,
-  reducers: {},
+  reducers: {
+    filterProductsByKeyword: (state, action) => {
+      state.filteredProducts =
+        state.products &&
+        state.products?.filter((product) =>
+          product.name.toLowerCase().includes(action.payload.toLowerCase())
+        );
+    },
+  },
   extraReducers: ({ addCase }) => {
     addCase(getProducts.pending, (state, action) => {
       state.isLoading = true;
@@ -29,3 +38,5 @@ const productStore = createSlice({
 });
 
 export default productStore.reducer;
+
+export const { filterProductsByKeyword } = productStore.actions;
