@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import ProductsPage from "./Pages/ProductsPage";
 import { useAppThunkDispatch } from "./Stores/Hooks";
 import { getProducts } from "./Stores/productStore";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { routes } from "./routes";
+import Home from "./Pages/Home";
 
 function App() {
   const dispatch = useAppThunkDispatch();
@@ -14,9 +14,19 @@ function App() {
 
   return (
     <BrowserRouter>
-      {routes.map((route) => {
-        return <Route  path={route.path} element={<ProductsPage />} />;
-      })}
+    
+      <Routes>
+        {routes.map((route) => {
+            return (
+              <Route
+                key={route.name}
+                path={route.path}
+                element={route.element}
+              />
+            );
+          })}
+        {/* <Route path="/products" element={<ProductsPage />} /> */}
+      </Routes>
     </BrowserRouter>
   );
 }
