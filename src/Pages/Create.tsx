@@ -60,8 +60,8 @@ const Create = () => {
               <HeaderText className="font-bold text-center">
                 Create Product
               </HeaderText>
-              <div className="flex flex-col gap-5 py-10 items-center">
-                <div className="w-5/12">
+              <div className="flex flex-col gap-5 py-10 items-center child:lg:w-5/12 child:w-11/12">
+                <div>
                   <Input
                     name="name"
                     className="w-full"
