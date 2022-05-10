@@ -2,6 +2,8 @@ export interface IProductsInitialState {
   products: IProduct[] | null;
   filteredProducts: IProduct[] | null | undefined;
   currentProduct: IProduct | null;
+  selectedCategory: string | null;
+  keyword: string | null;
 }
 
 export interface IProduct {

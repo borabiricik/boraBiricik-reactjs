@@ -1,7 +1,7 @@
 import React from "react";
 import ReactSelect, { SingleValue } from "react-select";
 import { useAppDispatch, useAppSelector } from "../../../Stores/Hooks";
-import { filterProducts } from "../../../Stores/productStore";
+import { changeCategory, filterProducts } from "../../../Stores/productStore";
 
 const CategoryFilterInput = () => {
   const dispatch = useAppDispatch();
@@ -15,7 +15,8 @@ const CategoryFilterInput = () => {
       value: number;
     }>;
   }) => {
-    dispatch(filterProducts(values?.label));
+    dispatch(changeCategory(values?.label));
+    dispatch(filterProducts())
   };
   return (
     <div data-testid="category-filter-input" className="w-3/12">

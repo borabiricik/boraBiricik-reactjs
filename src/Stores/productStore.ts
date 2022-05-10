@@ -7,6 +7,8 @@ const initialState: IProductsInitialState = {
   products: null,
   filteredProducts: null,
   currentProduct: null,
+  selectedCategory: null,
+  keyword: null,
 };
 
 export const getProducts = createAsyncThunk("getProducts", async () => {
@@ -27,26 +29,24 @@ const productStore = createSlice({
   name: "products",
   initialState,
   reducers: {
-    filterProducts: (state, action) => {
-      state.filteredProducts = state.products?.filter(
-        (product) =>
-          product.name.toLowerCase().includes(action.payload) ||
-          product.category === action.payload
-      );
+    filterProducts: (state) => {
+      state.filteredProducts = state.products?.filter((product) => {
+        return (
+          product.name
+            .toLowerCase()
+            .includes(state.keyword ? state.keyword : "") &&
+          product.category?.includes(
+            state.selectedCategory ? state.selectedCategory : ""
+          )
+        );
+      });
     },
-    // filterProductsByKeyword: (state, action) => {
-    //   state.filteredProducts =
-    //     state.products &&
-    //     state.products?.filter((product) =>
-    //       product.name.toLowerCase().includes(action.payload.toLowerCase())
-    //     );
-    // },
-
-    // filterProductsByCategory: (state, action) => {
-    //   state.filteredProducts = state.products?.filter((product) =>
-    //         product.category?.includes(action.payload)
-    //       )
-    // },
+    changeCategory: (state, action) => {
+      state.selectedCategory = action.payload;
+    },
+    changeKeyword: (state, action) => {
+      state.keyword = action.payload;
+    },
   },
   extraReducers: ({ addCase }) => {
     addCase(getProducts.fulfilled, (state, action) => {
@@ -63,5 +63,5 @@ const productStore = createSlice({
 
 export default productStore.reducer;
 
-export const { filterProducts } =
+export const { filterProducts, changeCategory, changeKeyword } =
   productStore.actions;
