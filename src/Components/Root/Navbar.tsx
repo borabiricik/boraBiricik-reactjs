@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <div className="sticky top-16 my-16 container  mx-auto">
+    <div className="sticky top-16 my-16 container mx-auto z-50">
       <div className="bg-white p-5 rounded-xl shadow-md flex justify-between items-center">
         <a
           href="https://upayments.com"

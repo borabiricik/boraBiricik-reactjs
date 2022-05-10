@@ -1,6 +1,7 @@
 export interface IProductsInitialState {
   products: IProduct[] | null;
-  filteredProducts: IProduct[] | null | undefined
+  filteredProducts: IProduct[] | null | undefined;
+  currentProduct: IProduct | null;
 }
 
 export interface IProduct {
