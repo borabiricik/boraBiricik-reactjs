@@ -26,7 +26,7 @@ const CategoryFilterInput = () => {
           options={categories.map((category) => {
             return { label: category.name, value: category.id };
           })}
-          className={"w-5/12 my-3"}
+          
           onChange={(values) => handleCategoryFilter({ values })}
         />
       </div>

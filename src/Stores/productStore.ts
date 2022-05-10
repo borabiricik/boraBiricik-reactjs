@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import api from "../Constants/api";
 import { ICategory } from "../Types/Category";
-import { IProductsInitialState } from "../Types/Product";
+import { IProduct, IProductsInitialState } from "../Types/Product";
 
 const initialState: IProductsInitialState = {
   products: null,
@@ -22,6 +22,15 @@ export const getProductById = createAsyncThunk(
   async ({ id }: { id: string | number | undefined }) => {
     const response = await api.get(`/products/${id}`);
     return response;
+  }
+);
+
+export const createProduct = createAsyncThunk(
+  "createProducts",
+  async (state: IProduct & { history: any }) => {
+    const {history,...payload} = state
+    const response = await api.post("/products", payload);
+    return { ...response, history};
   }
 );
 
@@ -57,6 +66,10 @@ const productStore = createSlice({
     });
     addCase(getProductById.fulfilled, (state, action) => {
       state.currentProduct = action.payload.data;
+    });
+
+    addCase(createProduct.fulfilled, (state, action) => {
+      console.log(action.payload)
     });
   },
 });

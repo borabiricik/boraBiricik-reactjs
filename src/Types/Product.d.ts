@@ -7,12 +7,12 @@ export interface IProductsInitialState {
 }
 
 export interface IProduct {
-  createdAt: number;
+  createdAt?: number;
   name: string;
   avatar: string;
   developerEmail: string;
   price: number;
-  id: string;
+  id?: string;
   category: string;
   description: string;
 }
