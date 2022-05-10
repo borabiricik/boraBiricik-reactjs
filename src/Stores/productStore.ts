@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import api from "../Constants/api";
+import { ICategory } from "../Types/Category";
 import { IProductsInitialState } from "../Types/Product";
 
 const initialState: IProductsInitialState = {
   products: null,
   filteredProducts: null,
-  isLoading: false,
 };
 
 export const getProducts = createAsyncThunk("getProducts", async () => {
@@ -25,18 +25,25 @@ const productStore = createSlice({
           product.name.toLowerCase().includes(action.payload.toLowerCase())
         );
     },
+
+    filterProductsByCategory: (state, action) => {
+      state.filteredProducts = state.filteredProducts 
+        ? state.filteredProducts.filter((product) =>
+            product.category?.includes(action.payload)
+          )
+        : state.products?.filter((product) =>
+            product.category?.includes(action.payload)
+          );
+    },
   },
   extraReducers: ({ addCase }) => {
-    addCase(getProducts.pending, (state, action) => {
-      state.isLoading = true;
-    });
     addCase(getProducts.fulfilled, (state, action) => {
       state.products = action.payload.data;
-      state.isLoading = false;
     });
   },
 });
 
 export default productStore.reducer;
 
-export const { filterProductsByKeyword } = productStore.actions;
+export const { filterProductsByKeyword, filterProductsByCategory } =
+  productStore.actions;

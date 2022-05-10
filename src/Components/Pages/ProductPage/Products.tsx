@@ -1,17 +1,18 @@
 import React from "react";
 import { useAppSelector } from "../../../Stores/Hooks";
 import FAB from "../../Root/FAB";
-import Input from "../../Root/Forms/Input";
 import Loading from "../../Root/Loading";
 import FilterSection from "./FilterSection";
 import ProductCard from "./ProductCard/ProductCard";
 
 const Products = () => {
-  const { products, isLoading, filteredProducts } = useAppSelector(
+  const { products, filteredProducts } = useAppSelector(
     (state) => state.products
   );
 
-  if (!isLoading) {
+  const { categories } = useAppSelector((state) => state.category);
+
+  if (products && categories) {
     return (
       <div className="container mx-auto sm:px-0 lg:px-72 ">
         <FilterSection />
