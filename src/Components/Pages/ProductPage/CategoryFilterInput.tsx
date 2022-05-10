@@ -2,6 +2,7 @@ import React from "react";
 import ReactSelect, { SingleValue } from "react-select";
 import { useAppDispatch, useAppSelector } from "../../../Stores/Hooks";
 import { changeCategory, filterProducts } from "../../../Stores/productStore";
+import CustomSelect from "../../Common/CustomSelect";
 
 const CategoryFilterInput = () => {
   const dispatch = useAppDispatch();
@@ -16,30 +17,22 @@ const CategoryFilterInput = () => {
     }>;
   }) => {
     dispatch(changeCategory(values?.label));
-    dispatch(filterProducts())
+    dispatch(filterProducts());
   };
-  return (
-    <div data-testid="category-filter-input" className="w-3/12">
-      <ReactSelect
-        placeholder="Categories"
-        styles={{
-          indicatorSeparator: () => ({
-            display: "none",
-          }),
-          control: (styles) => ({
-            ...styles,
-            borderWidth: 0,
-            boxShadow:
-              "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);",
-          }),
-        }}
-        onChange={(values) => handleCategoryFilter({ values })}
-        options={categories?.map((category) => {
-          return { label: category.name, value: parseInt(category.id) };
-        })}
-      />
-    </div>
-  );
+  if(categories){
+    return (
+      <div data-testid="category-filter-input" className="w-3/12">
+        <CustomSelect
+          options={categories.map((category) => {
+            return { label: category.name, value: category.id };
+          })}
+          className={"w-5/12 my-3"}
+          onChange={(values) => handleCategoryFilter({ values })}
+        />
+      </div>
+    );
+  }
+  return null
 };
 
 export default CategoryFilterInput;

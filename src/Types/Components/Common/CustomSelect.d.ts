@@ -1,6 +1,6 @@
 import { GroupBase, OptionsOrGroups } from "react-select";
 
-export interface ICustomSelectProps {
+export interface ICustomSelectProps extends StateManagedSelect {
   onChange?:
     | ((
         newValue: SingleValue<{
@@ -25,4 +25,5 @@ export interface ICustomSelectProps {
         }>
       >
     | undefined;
+    className?: string | undefined
 }

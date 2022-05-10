@@ -2,9 +2,10 @@ import React from "react";
 import ReactSelect, { ActionMeta } from "react-select";
 import { ICustomSelectProps } from "../../Types/Components/Common/CustomSelect";
 
-const CustomSelect = ({ onChange, options }: ICustomSelectProps) => {
+const CustomSelect = ({ onChange, options, className }: ICustomSelectProps) => {
   return (
     <ReactSelect
+      className={className}
       placeholder="Categories"
       styles={{
         indicatorSeparator: () => ({
