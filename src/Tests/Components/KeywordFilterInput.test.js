@@ -10,10 +10,18 @@ test("keyword input works correctly", () => {
       <KeywordFilterInput />
     </Provider>
   );
-  const input = getByTestId("keyword-filter-input")
+  const input = getByTestId("keyword-filter-input");
 
-  expect(input).toBeInTheDocument()
-  expect(input.type).toEqual("text")
+  expect(input).toBeInTheDocument();
+  expect(input.type).toEqual("text");
+});
 
-  userEvent.type(input,"mac")
+test("products works correctly after typing to input", () => {
+  const { getByTestId } = render(
+    <Provider store={store}>
+      <KeywordFilterInput />
+    </Provider>
+  );
+  const input = getByTestId("keyword-filter-input");
+  userEvent.type(input, "mac");
 });

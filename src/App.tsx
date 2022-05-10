@@ -8,17 +8,19 @@ function App() {
     <>
       <BrowserRouter>
         <Navbar />
-        <Routes>
-          {routes.map((route) => {
-            return (
-              <Route
-                key={route.name}
-                path={route.path}
-                element={route.element}
-              />
-            );
-          })}
-        </Routes>
+        <div className="container mx-auto sm:px-0 lg:px-72">
+          <Routes >
+            {routes.map((route) => {
+              return (
+                <Route
+                  key={route.name}
+                  path={route.path}
+                  element={route.element}
+                />
+              );
+            })}
+          </Routes>
+        </div>
       </BrowserRouter>
     </>
   );

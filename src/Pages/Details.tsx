@@ -18,7 +18,7 @@ const Details = () => {
 
   if (currentProduct) {
     return (
-      <div className="container mx-auto lg:px-60">
+      <div>
         <DetailsHeader />
         <DetailsBody />
       </div>

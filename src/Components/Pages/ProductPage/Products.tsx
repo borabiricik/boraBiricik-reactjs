@@ -14,7 +14,7 @@ const Products = () => {
 
   if (products && categories) {
     return (
-      <div className="container mx-auto sm:px-0 lg:px-72 ">
+      <div className="container mx-auto">
         <FilterSection />
         <div className=" grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-10 py-10">
           {filteredProducts

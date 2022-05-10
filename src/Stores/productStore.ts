@@ -27,23 +27,26 @@ const productStore = createSlice({
   name: "products",
   initialState,
   reducers: {
-    filterProductsByKeyword: (state, action) => {
-      state.filteredProducts =
-        state.products &&
-        state.products?.filter((product) =>
-          product.name.toLowerCase().includes(action.payload.toLowerCase())
-        );
+    filterProducts: (state, action) => {
+      state.filteredProducts = state.products?.filter(
+        (product) =>
+          product.name.toLowerCase().includes(action.payload) ||
+          product.category === action.payload
+      );
     },
+    // filterProductsByKeyword: (state, action) => {
+    //   state.filteredProducts =
+    //     state.products &&
+    //     state.products?.filter((product) =>
+    //       product.name.toLowerCase().includes(action.payload.toLowerCase())
+    //     );
+    // },
 
-    filterProductsByCategory: (state, action) => {
-      state.filteredProducts = state.filteredProducts
-        ? state.filteredProducts.filter((product) =>
-            product.category?.includes(action.payload)
-          )
-        : state.products?.filter((product) =>
-            product.category?.includes(action.payload)
-          );
-    },
+    // filterProductsByCategory: (state, action) => {
+    //   state.filteredProducts = state.products?.filter((product) =>
+    //         product.category?.includes(action.payload)
+    //       )
+    // },
   },
   extraReducers: ({ addCase }) => {
     addCase(getProducts.fulfilled, (state, action) => {
@@ -60,5 +63,5 @@ const productStore = createSlice({
 
 export default productStore.reducer;
 
-export const { filterProductsByKeyword, filterProductsByCategory } =
+export const { filterProducts } =
   productStore.actions;

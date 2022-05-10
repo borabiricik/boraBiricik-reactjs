@@ -6,7 +6,7 @@ const DetailsBody = () => {
   return (
     <div className="py-5">
       <h4 className="font-bold text-2xl pb-2">Description</h4>
-      <p>{currentProduct?.description}</p>
+      <p className="font-normal">{currentProduct?.description}</p>
     </div>
   );
 };
